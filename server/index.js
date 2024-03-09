@@ -15,8 +15,13 @@ const corsOption = {
 }
 app.use(cors(corsOption))
 app.use(express.json())
-mongoose.connect('mongodb://127.0.0.1:27017/apidemo', {
-useNewUrlParser: true, useUnifiedTopology: true 
+mongoose.connect("mongodb+srv://ajinthomas619:Motog31@cluster0.u9qv5iq.mongodb.net/apidemo",{
+useNewUrlParser: true,
+useUnifiedTopology:true
+}).then(() => {
+  console.log("Connected to MongoDB Atlas");
+}).catch((error) => {
+  console.error("Error connecting to MongoDB Atlas: ", error);
 });
 const db = mongoose.connection
 db.on('error',console.error.bind(console,'Mongodb connect error'))
@@ -99,5 +104,5 @@ const data = req.body.formData.data;
     res.status(500).json({ message: 'Internal Server Error' });
   }  })
   
-const PORT = 3000
+const PORT = 8080
 app.listen(PORT,()=>console.log(`server is running on port ${PORT}`))
