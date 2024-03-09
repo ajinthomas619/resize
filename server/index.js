@@ -3,6 +3,12 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const app = express()
+const path =  require('path')
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+ res.sendFile(path.join(__dirname+'./../client/index.html'));
+});
 const corsOption = {
     origin:'http://localhost:5173',
 
